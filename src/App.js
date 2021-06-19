@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import  CardList  from './components/card-list/card-list';
+import axios from "axios"
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      users : [],
+      defaultUser : null
+    };
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+componentDidMount(){
+  axios.get('https://randomuser.me/api/?inc=gender,name,nat,location,picture,email&results=20')
+  .then((response) => {
+    // handle success
+    console.log(response.data.results)
+    this.setState({ users : response.data.results, defaultUser : response.data.results[0]})
+  })
+  .catch((error) => {
+    // handle error
+    console.log(error);
+  })
+}
+render() {
+    const { users, defaultUser} = this.state;
+    return (
+      <div className="App">
+        <h1>Users</h1>
+         <CardList users = {users} defaultUser = {defaultUser}/>    
+      </div>
+    );
+  }
 }
 
-export default App;
+export default App;;
