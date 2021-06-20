@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import  CardList  from './components/card-list/card-list';
+import Navbar from "./components/navbar/Navbar"
 import axios from "axios"
 class App extends Component {
   constructor(){
@@ -29,6 +30,7 @@ render() {
     const { users, defaultUser} = this.state;
     return (
       <div className="App">
+        <Navbar />
         {/*rendering card list*/}
          <CardList users = {users} defaultUser = {defaultUser}/>    
       </div>

@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f1f3f6;
+  font-style: normal;
 }
 
 code {
@@ -22,19 +23,22 @@ img{
 
 h1{
 font-size : 2rem;
+letter-spacing: 0.1rem;
 color :  #E16259; 
-text-decoration : underline;
+text-decoration: underline;
+font-weight: bold;
 }
 
 h2{
+font-weight: 500;
 font-size: 1.2rem;
 }
 h4{
-  
   font-size: 0.875rem;
   color :  #E16259;
 }
 h5{
+  font-weight: light;
   font-size: 0.875rem; 
 }
 
@@ -47,7 +51,6 @@ color: rgb(109, 109, 109);
 span{
 text-transform: uppercase;
 }
-
 
 /* responsive styles */
 @media(max-width : 800px){

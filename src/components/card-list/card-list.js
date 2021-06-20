@@ -25,7 +25,6 @@ const styles = () => ({
           display: "flex",
           flexDirection: "column",
           alignItems : "flex-start",
-          background: "#f1f3f6",
           boxShadow: 
           `inset 0 0 15px rgba(55, 84, 170,0),
           inset 0 0 20px rgba(255, 255, 255,0),
@@ -40,17 +39,37 @@ const styles = () => ({
           "&:hover" : {
                transform: "scale(1.05)"
           }
-      },     
+      },  
+
+      inactiveCard : {
+          background: "#f1f3f6",
+      },
+      activeCard : {
+          background: "#E6E6FA"
+      }
 })
 function CardList (props){
 const { classes } = props;   
 
 //to store the current user 
 const [currentUser, setUser] = useState(props.defaultUser)
+
 //function trigged onclick to update current user
 const getCurrentUser = (user) => {
-      setUser(user)
-    }
+      setUser(user) 
+}
+
+//toggling active card styles
+const toggleActiveStyles = (user) => {
+let current = currentUser ? currentUser : null
+if(user == current){
+     return [classes.cardContainer,classes.activeCard].join(" ")
+ }
+else{
+    return  [classes.cardContainer,classes.inactiveCard].join(" ")  
+ }
+}
+
      return(
           <>
           {/*passing current user props to MainCard with necessary checks*/}
@@ -70,11 +89,12 @@ const getCurrentUser = (user) => {
           />
          <Grid  spacing={2} className={classes.cardList}>
               {/*Mapping over users array for rendering users card list */}
-              {props.users.map(user => (
+              {props.users.map((user,index) => (
                  <Grid item 
-                 className={classes.cardContainer}
+                 key = {index}
+                 className={toggleActiveStyles(user)}
                  onClick = {() =>{getCurrentUser(user)}}>
-                 <p>{user.gender}{" "}{"."}{" "}<span>{user.nat}</span></p>   
+                   <p>{user.gender}{" "}{"."}{" "}<span>{user.nat}</span></p>   
                   <h2>{user.name.title}{"."}{" "}{user.name.first}{" "}{user.name.last}</h2> 
                   <h4>{user.email}</h4>   
                  </Grid>    
