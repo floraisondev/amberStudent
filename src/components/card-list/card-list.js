@@ -54,7 +54,7 @@ const { classes } = props;
 //to store the current user 
 const [currentUser, setUser] = useState(props.defaultUser)
 
-//function trigged onclick to update current user
+//function triggered onclick to update current user
 const getCurrentUser = (user) => {
       setUser(user) 
 }
