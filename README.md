@@ -1,11 +1,11 @@
 1. Clone the site
 
-### git clone https://github.com/floraisondev/kawaSpaceTask.git
+### `git clone https://github.com/floraisondev/kawaSpaceTask.git`
 
 2. Install the dependancies
 
-### cd kawaSpaceTask/
-### npm install
+### `cd kawaSpaceTask/`
+### `npm install`
 
 3. Start development server
 
