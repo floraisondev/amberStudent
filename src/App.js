@@ -5,29 +5,31 @@ import axios from "axios"
 class App extends Component {
   constructor(){
     super();
+//creating state variables to store the users fetched
+//defaultUser will store the first user which will initially be the main card
     this.state = {
       users : [],
       defaultUser : null
     };
   }
 
-componentDidMount(){
+//fetching data
+  componentDidMount(){
   axios.get('https://randomuser.me/api/?inc=gender,name,nat,location,picture,email&results=20')
   .then((response) => {
     // handle success
-    console.log(response.data.results)
     this.setState({ users : response.data.results, defaultUser : response.data.results[0]})
   })
   .catch((error) => {
     // handle error
-    console.log(error);
+    console.error(error);
   })
 }
 render() {
     const { users, defaultUser} = this.state;
     return (
       <div className="App">
-        <h1>Users</h1>
+        {/*rendering card list*/}
          <CardList users = {users} defaultUser = {defaultUser}/>    
       </div>
     );
