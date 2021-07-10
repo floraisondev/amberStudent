@@ -1,75 +1,63 @@
 import React, { useState } from 'react';
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import { FaArrowAltCircleLeft , FaArrowAltCircleRight} from 'react-icons/fa';
-
+import { IoArrowForwardOutline, IoArrowBackOutline } from "react-icons/io5"
 
 //styles
 const styles = () => ({ 
-    slider : {
-     display : "flex",
+    slider : { 
      height : "100vh",
-     alignItems:"center",
-     justifyContent : "right",
-     
+     position : "relative"
     },
     sliderContent : {
-       
-        width : "100%",
-        background : "#fff",
-        cursor : "pointer",
-        margin : "5px",
-       height : "40vh",
-   
-       
+        width : "100%", 
+        transiton : "0.45s",    
     },
-    leftArrow : {
-        position : "absolute",
-        top : "80%",
-        left : "32px",
-        fontSize : "3rem",
-        color : "#000",
-        zIndex : 10,
-        cursor : "pointer",
-        userSelect : "none"
 
-    },
-    rightArrow : {
-        position : "absolute",
-        top : "80%",
-        right : "32px",
-        fontSize : "3rem",
-        color : "#000",
+    Arrow : {
+        fontSize : "4rem",
+        background: "#cacef5",
+        borderRadius: 50,
+        padding : 10,
         zIndex : 10,
         cursor : "pointer",
-        userSelect : "none"
+        userSelect : "none",
+        margin : 7
     },
-    // slide : {
-    //     opacity : 0,
-    //     transitionDuration : "1s ease"
-    // },
-    // active : {
-    //     opacity : 1,
-    //     transitionDuration : "1s",
-    //     transform : "scale(0.8)"
-    // },
+//     slide : {        
+//         transiton : "0.45s",
+//     },
+//      active : {
+//       transiton : "0.45s",     
+//       animation: "slide 0.5s forwards",
+//       animationDelay: "2s",
+      
+//   },
+        
+     
     indicator : {
-        position : "absolute",
-        left : "50%",
-        transform : "translateX(-50%)",
-        top : "60%",
-        zIndex:20,
-        width : "100%"
+       marginTop : "2.5rem"
+    },
+    slideContainer : {
+     background : "#fff",
+     padding : "4rem",
+     paddingLeft : "6.5em",
+     position : "absolute",
+     top : "20%",
+     right : 0,
+     width : "90%",
+     borderRadius : "320px",
+     height : "70vh",
+     borderTopRightRadius : 0,
+     borderBottomRightRadius : 0
     },
     imgBtn : {
      display : "inline-block",
-     height : "25px",
-     width : "25px",
      margin : "5px",
      cursor : "pointer",
     },
     activeImageBtn : {
-        border : "4px solid blue"
+        border : "4px solid #602FF7"
     }
 })
 function Testimonial (props){
@@ -93,24 +81,32 @@ if(!Array.isArray(props.users) || length <=0){
    return(
           <> 
          <Grid  className = {classes.slider}>
-             <FaArrowAltCircleLeft className = {classes.leftArrow} onClick = {prevSlide} />
-             <FaArrowAltCircleRight className = {classes.rightArrow} onClick = {nextSlide} />
-             <Grid className= {classes.indicator}>
-             {props.users.map((user,index) => (
-                   <img src= {user.avatar } className= {index === current ? [classes.imgBtn, classes.activeImageBtn].join(" "): classes.imgBtn} onClick = {() => changeImageSlide(index)}/>
-                 ))}  
-             </Grid>
+            
+             <Grid className = {classes.slideContainer}>
+            
                  {props.users.map((user,index) => (
                 <Grid className = {index === current ? [classes.slide,classes.active].join(" ") : classes.slide} key = {index} >
                    {index === current && (<Grid className={classes.sliderContent}>
-                     <h1>TESTIMONIALS</h1>
+                     <h3>TESTIMONIALS</h3>
                     <h2>{user.message}</h2>   
                      <p>{user.lorem}</p> 
-                    <p>{user.name}{" "}{user.designation}</p>   
-                  
+                    <div style ={{ display :"flex", justifyContent: "space-between"}}>
+                    <p><span>{user.name}</span>{", "}{user.designation}{", "}{user.location}</p> 
+                   <p style = {{ color : "#4120A9", cursor : "pointer"}}>READ FULL STORY</p>     
+                    </div>
+                      
                  </Grid> )}
                </Grid>
-             ))}  
+             ))}
+              <Grid className= {classes.indicator}>
+             {props.users.map((user,index) => (
+                   <img src= {user.avatar } className= {index === current ? [classes.imgBtn, classes.activeImageBtn].join(" "): classes.imgBtn} onClick = {() => changeImageSlide(index)}/>
+                 ))}
+             <IoArrowBackOutline style = {{ marginLeft : "10%"}}className = {classes.Arrow} onClick = {prevSlide} />
+             <IoArrowForwardOutline className = {classes.Arrow} onClick = {nextSlide} />  
+             </Grid>  
+             </Grid>
+           
          </Grid>   
           </>
      )
