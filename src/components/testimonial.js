@@ -9,48 +9,68 @@ const styles = () => ({
      height : "100vh",
      position : "relative"
     },
+
+    slideContainer : {
+        background : "#fff",
+        width : "95%",
+        height : "80vh",
+        top:"20%",
+        borderTopRightRadius : "100px",
+        position : "absolute",
+        padding : "2rem",
+        "@media(min-width : 800px)": {
+            padding : "4rem",
+            paddingLeft : "6.5em",
+            top : "20%",
+            right : 0,
+            width : "95%",
+            borderRadius : "320px",
+            height : "70vh",
+            borderTopRightRadius : 0,
+            borderBottomRightRadius : 0,
+        }     
+    },
+
     sliderContent : {
-        width : "100%", 
-        transiton : "0.45s",    
+        "@media(min-width : 800px)": {
+        width : "90%", 
+        transiton : "0.45s",   
+        margin: "20px 0 0 45px" 
+        }
     },
 
     Arrow : {
-        fontSize : "4rem",
-        background: "#cacef5",
+       
+        fontSize : "4vw",
+        background: "#F0F8FF",
         borderRadius: 50,
         padding : 10,
         zIndex : 10,
         cursor : "pointer",
         userSelect : "none",
-        margin : 7
-    },
-//     slide : {        
-//         transiton : "0.45s",
-//     },
-//      active : {
-//       transiton : "0.45s",     
-//       animation: "slide 0.5s forwards",
-//       animationDelay: "2s",
-      
-//   },
+        margin : 7,
         
+    
+    },
+    slide : {     
+     opacity : 0,
+     transitionDuration : "1s ease"  
+    },
+
+     active : {
+      opacity : 1,
+      transitionDuration : "1s",
+      transform : "0.4s ease-in-out"         
+  },
      
     indicator : {
-       marginTop : "2.5rem"
+    
+        "@media(min-width : 800px)": {
+       marginTop : "2.5rem",
+       marginLeft : "40px",   
+        }
     },
-    slideContainer : {
-     background : "#fff",
-     padding : "4rem",
-     paddingLeft : "6.5em",
-     position : "absolute",
-     top : "20%",
-     right : 0,
-     width : "90%",
-     borderRadius : "320px",
-     height : "70vh",
-     borderTopRightRadius : 0,
-     borderBottomRightRadius : 0
-    },
+   
     imgBtn : {
      display : "inline-block",
      margin : "5px",
@@ -58,6 +78,11 @@ const styles = () => ({
     },
     activeImageBtn : {
         border : "4px solid #602FF7"
+    },
+    dispFlex : {
+        "@media(min-width : 800px)": {
+            display :"flex", justifyContent: "space-between"
+        }
     }
 })
 function Testimonial (props){
@@ -75,22 +100,21 @@ const changeImageSlide = (id) => {
     setCurrent(id)
 }
 console.log(current)
+
 if(!Array.isArray(props.users) || length <=0){
     return null
 }
    return(
           <> 
-         <Grid  className = {classes.slider}>
-            
+         <Grid  className = {classes.slider}>         
              <Grid className = {classes.slideContainer}>
-            
                  {props.users.map((user,index) => (
                 <Grid className = {index === current ? [classes.slide,classes.active].join(" ") : classes.slide} key = {index} >
                    {index === current && (<Grid className={classes.sliderContent}>
                      <h3>TESTIMONIALS</h3>
                     <h2>{user.message}</h2>   
                      <p>{user.lorem}</p> 
-                    <div style ={{ display :"flex", justifyContent: "space-between"}}>
+                    <div className={classes.dispFlex}>
                     <p><span>{user.name}</span>{", "}{user.designation}{", "}{user.location}</p> 
                    <p style = {{ color : "#4120A9", cursor : "pointer"}}>READ FULL STORY</p>     
                     </div>
@@ -102,7 +126,7 @@ if(!Array.isArray(props.users) || length <=0){
              {props.users.map((user,index) => (
                    <img src= {user.avatar } className= {index === current ? [classes.imgBtn, classes.activeImageBtn].join(" "): classes.imgBtn} onClick = {() => changeImageSlide(index)}/>
                  ))}
-             <IoArrowBackOutline style = {{ marginLeft : "10%"}}className = {classes.Arrow} onClick = {prevSlide} />
+             <IoArrowBackOutline style = {{ marginLeft : "15%"}}className = {classes.Arrow} onClick = {prevSlide} />
              <IoArrowForwardOutline className = {classes.Arrow} onClick = {nextSlide} />  
              </Grid>  
              </Grid>

@@ -8,7 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
-  background : #cacef5;
+  background : #F0F8FF;
 }
 
 code {
@@ -18,23 +18,31 @@ code {
 
 img{
   border-radius : 50px;
-  height: 80px;
-  width : 80px;
+  height : 6%;
+  width: 6%;
   padding : 3px;
 }
 
+@media(max-width : 1130px){
+  img{
+    height : 7%;
+    width : 7%;
+  }
+}
 
 h2{
 font-weight: bold;
-font-size: 2rem;
+font-size: 1.5rem;
 color : rgb(77, 74, 74);
 text-align: left;
+margin: 15px 0;
 }
 
 h3{
   text-transform: uppercase;
   text-align: left;
   font-size: 12px;
+  transition: transform 0.4s ease-in-out;
 }
 
 p{
@@ -49,21 +57,16 @@ font-weight: bold;
 
 /* responsive styles */
 @media(max-width : 800px){
-  h5, h4{
-    font-size: 13px;
-  }
-  h1{
-    font-size : 1.2rem;
-  }
-  img{
-    height : 30px;
-    width: 30px
-  }
+ img {
+   height: 45px;
+   width: 45px;
+ }
   p{
     font-size: 13px;
   }
   h2{
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
+  
  
 }
