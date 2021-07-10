@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import  CardList  from './components/card-list/card-list';
-import Navbar from "./components/navbar/Navbar"
+import  Testimonial from "./components/testimonial"
 import axios from "axios"
 class App extends Component {
   constructor(){
@@ -16,10 +15,11 @@ class App extends Component {
 
 //fetching data
   componentDidMount(){
-  axios.get('https://randomuser.me/api/?inc=gender,name,nat,location,picture,email&results=20')
+  axios.get('https://testimonialapi.toolcarton.com/api')
   .then((response) => {
     // handle success
-    this.setState({ users : response.data.results, defaultUser : response.data.results[0]})
+    this.setState({users : response.data, defaultUser : response.data[0]})
+    console.log(response.data[0])
   })
   .catch((error) => {
     // handle error
@@ -30,9 +30,7 @@ render() {
     const { users, defaultUser} = this.state;
     return (
       <div className="App">
-        <Navbar />
-        {/*rendering card list*/}
-         <CardList users = {users} defaultUser = {defaultUser}/>    
+         <Testimonial users = {users} defaultUser = {defaultUser}/>     
       </div>
     );
   }
