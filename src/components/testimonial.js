@@ -104,21 +104,23 @@ const styles = () => ({
     }
 })
 function Testimonial (props){
-const { classes } = props;   
+const { classes } = props;
+//to keep track of current slide   
 const [current, setCurrent] = useState(0)
 const length = props.users.length
-
+//navigate to next slide
 const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
 }
-
+//navigate to prev slide
 const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1)
 }
+//map image to slide
 const changeImageSlide = (id) => {
     setCurrent(id)
 }
-
+//if empty array return nothing
 if(!Array.isArray(props.users) || length <= 0){
     return null
 }
@@ -129,8 +131,7 @@ if(!Array.isArray(props.users) || length <= 0){
              <h3 className= { classes.sliderContent}>TESTIMONIALS</h3>
                  {props.users.map((user,index) => (
                 <Grid className = {index === current ? [classes.slide,classes.active].join(" ") : classes.slide} key = {index} >
-                   {index === current && (<Grid className={classes.sliderContent}>
-                    
+                   {index === current && (<Grid className={classes.sliderContent}>        
                     <h2>{user.message}</h2>   
                      <p>{user.lorem}</p> 
                     <div className={classes.dispFlex}>
@@ -147,9 +148,8 @@ if(!Array.isArray(props.users) || length <= 0){
              <IoArrowBackOutline className = {[classes.Arrow, classes.leftArrowMargin].join(" ")} onClick = {prevSlide} />
              <IoArrowForwardOutline className = {classes.Arrow} onClick = {nextSlide} />  
              </Grid>  
-             </Grid>
-           
-         </Grid>   
+             </Grid>     
+           </Grid>   
           </>
      )
 }

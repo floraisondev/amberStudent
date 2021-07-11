@@ -6,10 +6,8 @@ class App extends Component {
   constructor(){
     super();
 //creating state variables to store the users fetched
-//defaultUser will store the first user which will initially be the main card
     this.state = {
       users : [],
-      defaultUser : null
     };
   }
 
@@ -18,8 +16,7 @@ class App extends Component {
   axios.get('https://testimonialapi.toolcarton.com/api')
   .then((response) => {
     // handle success
-    this.setState({users : response.data, defaultUser : response.data[0]})
-    console.log(response.data[0])
+    this.setState({users : response.data })
   })
   .catch((error) => {
     // handle error
@@ -30,7 +27,7 @@ render() {
     const { users, defaultUser} = this.state;
     return (
       <div className="App">
-         <Testimonial users = {users} defaultUser = {defaultUser}/>     
+         <Testimonial users = {users} />     
       </div>
     );
   }
