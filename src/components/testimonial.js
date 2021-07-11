@@ -61,17 +61,23 @@ const styles = () => ({
             marginLeft : "30%"
           }
     },
-    slide : {     
+    slide : {  
+   "@media(min-width : 800px)": {
+      left : "500px"
+     },   
      opacity : 0,
      transitionDuration : "0.5s ease",
-     position : "relative",
-     left : "500px"
+     position : "relative", 
+     right : "500px" 
     },
 
      active : {
+    "@media(min-width : 800px)": {
+      left : "0px"
+     },   
       opacity : 1,
       transitionDuration : "0.5s",
-      left : "0px"
+      right : "0px"
              
   },
      
