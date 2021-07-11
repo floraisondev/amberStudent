@@ -14,11 +14,12 @@ const styles = () => ({
         background : "#fff",
         width : "95%",
         height : "80vh",
-        top:"20%",
+        bottom : 0,
         borderTopRightRadius : "100px",
         position : "absolute",
         padding : "2rem",
         "@media(min-width : 800px)": {
+            top:"20%",
             padding : "4rem",
             paddingLeft : "6.5em",
             top : "20%",
@@ -36,7 +37,8 @@ const styles = () => ({
         width : "90%", 
         transiton : "0.45s",   
         margin: "20px 0 0 45px" 
-        }
+        },
+      
     },
 
     Arrow : {
@@ -68,7 +70,7 @@ const styles = () => ({
      opacity : 0,
      transitionDuration : "0.5s ease",
      position : "relative", 
-     right : "500px" 
+     right : "500px",
     },
 
      active : {
@@ -86,7 +88,7 @@ const styles = () => ({
        marginTop : "2.5rem",
        marginLeft : "40px",   
         },
-        marginTop : "3rem"
+        marginTop : "4rem"
     },
    
     imgBtn : {
