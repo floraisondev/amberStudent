@@ -40,7 +40,6 @@ const styles = () => ({
     },
 
     Arrow : {
-       
         fontSize : "4vw",
         background: "#F0F8FF",
         borderRadius: 50,
@@ -48,27 +47,40 @@ const styles = () => ({
         zIndex : 10,
         cursor : "pointer",
         userSelect : "none",
-        margin : 7,
-        
-    
+        margin : 7,   
+        "@media(max-width : 800px)" : {
+            fontSize : "2.5rem"
+        } 
+    },
+    leftArrowMargin : {
+        marginLeft : "15%",
+        "@media(max-width : 1120px)":{
+          marginLeft : "40%"
+        },
+        "@media(max-width : 800px)":{
+            marginLeft : "30%"
+          }
     },
     slide : {     
      opacity : 0,
-     transitionDuration : "1s ease"  
+     transitionDuration : "0.5s ease",
+     position : "relative",
+     left : "500px"
     },
 
      active : {
       opacity : 1,
-      transitionDuration : "1s",
-      transform : "0.4s ease-in-out"         
+      transitionDuration : "0.5s",
+      left : "0px"
+             
   },
      
     indicator : {
-    
         "@media(min-width : 800px)": {
        marginTop : "2.5rem",
        marginLeft : "40px",   
-        }
+        },
+        marginTop : "3rem"
     },
    
     imgBtn : {
@@ -89,6 +101,7 @@ function Testimonial (props){
 const { classes } = props;   
 const [current, setCurrent] = useState(0)
 const length = props.users.length
+
 const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
 }
@@ -99,26 +112,25 @@ const prevSlide = () => {
 const changeImageSlide = (id) => {
     setCurrent(id)
 }
-console.log(current)
 
-if(!Array.isArray(props.users) || length <=0){
+if(!Array.isArray(props.users) || length <= 0){
     return null
 }
    return(
           <> 
          <Grid  className = {classes.slider}>         
              <Grid className = {classes.slideContainer}>
+             <h3 className= { classes.sliderContent}>TESTIMONIALS</h3>
                  {props.users.map((user,index) => (
                 <Grid className = {index === current ? [classes.slide,classes.active].join(" ") : classes.slide} key = {index} >
                    {index === current && (<Grid className={classes.sliderContent}>
-                     <h3>TESTIMONIALS</h3>
+                    
                     <h2>{user.message}</h2>   
                      <p>{user.lorem}</p> 
                     <div className={classes.dispFlex}>
                     <p><span>{user.name}</span>{", "}{user.designation}{", "}{user.location}</p> 
                    <p style = {{ color : "#4120A9", cursor : "pointer"}}>READ FULL STORY</p>     
-                    </div>
-                      
+                    </div>           
                  </Grid> )}
                </Grid>
              ))}
@@ -126,7 +138,7 @@ if(!Array.isArray(props.users) || length <=0){
              {props.users.map((user,index) => (
                    <img src= {user.avatar } className= {index === current ? [classes.imgBtn, classes.activeImageBtn].join(" "): classes.imgBtn} onClick = {() => changeImageSlide(index)}/>
                  ))}
-             <IoArrowBackOutline style = {{ marginLeft : "15%"}}className = {classes.Arrow} onClick = {prevSlide} />
+             <IoArrowBackOutline className = {[classes.Arrow, classes.leftArrowMargin].join(" ")} onClick = {prevSlide} />
              <IoArrowForwardOutline className = {classes.Arrow} onClick = {nextSlide} />  
              </Grid>  
              </Grid>
